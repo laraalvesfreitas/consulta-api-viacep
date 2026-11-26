@@ -1,28 +1,25 @@
 # 📮 Consulta de CEP com ViaCEP
 
-Mini projeto em Python que consome a API pública [ViaCEP](https://viacep.com.br/) para buscar o endereço completo a partir de um CEP.
+Mini projeto em Python que consome a API pública [ViaCEP](https://viacep.com.br/) para buscar o endereço a partir de um CEP, direto no terminal.
 
 ## 🎯 Objetivo
 
-Praticar o consumo de APIs REST com Python: fazer requisições HTTP, tratar a resposta em JSON e lidar com erros (CEP inválido, CEP inexistente, falha de conexão).
+Praticar o consumo de APIs REST com Python: fazer requisições HTTP, ler a resposta em JSON e tratar o caso de CEP inexistente.
 
 ## ✨ Funcionalidades
 
-- Consulta de endereço por CEP
-- Validação do formato do CEP (8 dígitos)
-- Tratamento de CEP inexistente
-- Tratamento de erros de conexão e timeout
-- Exibição formatada do resultado no terminal
+- Consulta de endereço por CEP informado pelo usuário
+- Validação da quantidade de dígitos (8)
+- Tratamento de CEP não encontrado
+- Exibição de CEP, logradouro, complemento, bairro, cidade, estado e região
+- Opção de realizar uma nova consulta sem reiniciar o programa
 
 ## 🛠️ Tecnologias
 
-- Python 3.8+
+- Python 3.12+
 - [requests](https://pypi.org/project/requests/)
 
-## 📋 Pré-requisitos
-
-- Python 3.8 ou superior instalado
-- pip
+> O código usa aspas simples dentro de f-strings com aspas simples (ex.: `f'{dados['cep']}'`), o que só é permitido a partir do Python 3.12.
 
 ## 🚀 Como executar
 
@@ -45,10 +42,10 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-3. Instale as dependências:
+3. Instale a dependência:
 
 ```bash
-pip install -r requirements.txt
+pip install requests
 ```
 
 4. Execute o programa:
@@ -60,23 +57,36 @@ python main.py
 ## 💻 Exemplo de uso
 
 ```text
-Digite o CEP (somente números): 30140071
+####################
+### Consulta CEP ###
+####################
+Digite um CEP para consulta: 30140071
+--- CEP Encontrado ---
+CEP: 30140-071
+Logradouro: Avenida Afonso Pena
+Complemento:
+Bairro: Centro
+Cidade: Belo Horizonte
+Estado: Minas Gerais
+Região: Sudeste
 
------ Endereço encontrado -----
-CEP:         30140-071
-Logradouro:  Avenida Afonso Pena
-Bairro:      Centro
-Cidade:      Belo Horizonte
-Estado:      MG
-DDD:         31
--------------------------------
+Deseja realizar uma nova consulta?
+ 1 [SIM]
+ 2 [SAIR]
 ```
 
-Exemplo com CEP inexistente:
+CEP inexistente:
 
 ```text
-Digite o CEP (somente números): 99999999
-CEP não encontrado.
+Digite um CEP para consulta: 99999999
+99999999 CEP Inválido!
+```
+
+Quantidade de dígitos incorreta:
+
+```text
+Digite um CEP para consulta: 123
+Quantidade de digitos inválida.
 ```
 
 ## 🔌 Sobre a API
@@ -84,20 +94,6 @@ CEP não encontrado.
 - **Endpoint:** `https://viacep.com.br/ws/{cep}/json/`
 - **Método:** `GET`
 - **Autenticação:** não é necessária
-
-Exemplo de resposta:
-
-```json
-{
-  "cep": "30140-071",
-  "logradouro": "Avenida Afonso Pena",
-  "complemento": "",
-  "bairro": "Centro",
-  "localidade": "Belo Horizonte",
-  "uf": "MG",
-  
-}
-```
 
 Quando o CEP tem formato válido mas não existe, a API retorna:
 
@@ -109,32 +105,19 @@ Quando o CEP tem formato válido mas não existe, a API retorna:
 
 ```text
 consulta-cep/
-├── main.py            # Ponto de entrada do programa
-├── requirements.txt   # Dependências
-└── README.md          # Documentação
+├── main.py     # Código do programa
+└── README.md   # Documentação
 ```
-
-## 🧪 Tratamento de erros
-
-| Situação              | Comportamento                                   |
-|-----------------------|-------------------------------------------------|
-| CEP com formato inválido | Exibe mensagem pedindo 8 dígitos numéricos   |
-| CEP inexistente       | Exibe "CEP não encontrado"                      |
-| Sem conexão / timeout | Exibe mensagem de erro de conexão               |
-| Erro HTTP (4xx/5xx)   | Exibe o código de status retornado              |
 
 ## 🔮 Próximos passos
 
-- [ ] Buscar CEP a partir de UF, cidade e logradouro
-- [ ] Salvar histórico de consultas em arquivo (CSV/JSON)
+- [ ] Validar se o CEP contém apenas números
+- [ ] Tratar erros de conexão e timeout (`requests.exceptions`)
+- [ ] Validar a opção do menu (evitar erro com entrada não numérica)
+- [ ] Trocar a recursão por um laço `while` na nova consulta
 - [ ] Criar testes automatizados com `pytest`
-- [ ] Adicionar interface via linha de comando com `argparse`
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Sinta-se à vontade para usar e modificar.
 
 ## 👩‍💻 Autora
 
 **Lara Alves de Freitas**
-[LinkedIn](https://linkedin.com/in/laraalvesfreitas) · [GitHub](https://github.com/laraalvesfreitas)
+[LinkedIn](https://linkedin.com/in/seu-perfil) · [GitHub](https://github.com/seu-usuario)
