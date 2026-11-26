@@ -106,16 +106,9 @@ Quando o CEP tem formato válido mas não existe, a API retorna:
 ```text
 consulta-cep/
 ├── main.py     # Código do programa
+├── requirements.txt
 └── README.md   # Documentação
 ```
-
-## 🔮 Próximos passos
-
-- [ ] Validar se o CEP contém apenas números
-- [ ] Tratar erros de conexão e timeout (`requests.exceptions`)
-- [ ] Validar a opção do menu (evitar erro com entrada não numérica)
-- [ ] Trocar a recursão por um laço `while` na nova consulta
-- [ ] Criar testes automatizados com `pytest`
 
 ## 👩‍💻 Autora
 
